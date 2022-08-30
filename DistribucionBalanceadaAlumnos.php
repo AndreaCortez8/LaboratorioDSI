@@ -39,10 +39,15 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
 
                                 <tbody>
                                         <?php 
+											
                                             $AlumnosNuevos = mysqli_query($con,"SELECT  M.Codigo, M.Nombre FROM Matriculados2022I M left Join Tutorados T
                                                                                 on M.Codigo=T.Codigo Where T.Codigo is NULL;");
                                             
-                                            $AlumnosAntiguos = mysqli_query($con,"SELECT Codigo FROM tutorados");
+                                            $AlumnosAntiguos = mysqli_query($con,"SELECT * FROM tutorados T INNER JOIN Matriculados2022I M on T.Codigo = M.Codigo");
+                                            //$MatriculadosTutor =array();
+                                            while($MatriculadosTutor = mysqli_fetch_array($AlumnosAntiguos)){
+                                                mysqli_query($con,"INSERT INTO matriculadoscontutor VALUES ('$MatriculadosTutor[Codigo]','$MatriculadosTutor[Nombre]','$MatriculadosTutor[NombreDocente]')");
+                                            }
 
                                             $Docentes = mysqli_query($con,"SELECT NombreDocente FROM tutorados GROUP BY NombreDocente");
 
@@ -51,10 +56,10 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                                             $Cantidad_Docente = mysqli_num_rows($Docentes);
 
                                             //Operación
-                                            $aux = floor(($Cantidad_AlumnosNuevos+$Cantidad_AlumnosAntiguos)/$Cantidad_Docente);//21
+                                            $aux = ceil(($Cantidad_AlumnosNuevos+$Cantidad_AlumnosAntiguos)/$Cantidad_Docente);//21
 
                                             //Hallar la cantidad de tutorados de cada docente
-                                                $CantidadTutorados_x_DOcente = mysqli_query($con,"SELECT COUNT(*) AS CantidadTutorados FROM tutorados
+                                            $CantidadTutorados_x_DOcente = mysqli_query($con,"SELECT COUNT(*) AS CantidadTutorados FROM matriculadoscontutor
                                                                                                     GROUP BY NombreDocente");
 
                                             //Cantidad en arreglo
@@ -66,23 +71,24 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                                             
                                             $ArregloAlumnoNuevos = array();
                                             $ArregloAlumnosNn = array();
-                                            
                                             $ArregloDocentes =array();
                                             $ArregloCantidadTutorados = array();
-                                            
+                                            //****
                                             while($Arreglo_AlumnosNuevos = mysqli_fetch_array($AlumnosNuevos)){
                                                 array_push($ArregloAlumnoNuevos,$Arreglo_AlumnosNuevos['Codigo']);
                                                 array_push($ArregloAlumnosNn,$Arreglo_AlumnosNuevos['Nombre']);
                                             }
-                                            
+                                            //*
                                             while($Arreglo_Docentes = mysqli_fetch_array($Docentes)){
                                                 array_push($ArregloDocentes,$Arreglo_Docentes['NombreDocente']);
                                             }
-                                            
+                                            //*
+                                             //*
                                              while($CantidadTutoradoDocente = mysqli_fetch_array($CantidadTutorados_x_DOcente)){
                                                 array_push($ArregloCantidadTutorados,$CantidadTutoradoDocente['CantidadTutorados']);
                                             }
-                                           
+                                            
+                                            //*
                                             while($i < $aux2){
                                                 $Tutorados = intval($ArregloCantidadTutorados[$i]);
                                                 while($Tutorados < $aux){
@@ -97,11 +103,10 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                                                 $i=$i+1;
                                                 
                                             }
-                                            
-                                            $Distribución_Completa= mysqli_query($con,"SELECT * FROM tutorados UNION SELECT * FROM distribucion order by NombreDocente asc ");
+                                            //*
+                                            $Distribución_Completa= mysqli_query($con,"SELECT * FROM matriculadoscontutor UNION SELECT * FROM distribucion order by NombreDocente asc ");
                                             
 											//Listar en una tabla
-                                            $Distribución = mysqli_query($con,"SELECT codigo, Nombre, NombreDocente FROM distribucion");
 											$n=0;
 											while($fila1 = mysqli_fetch_array($Distribución_Completa)){
 												$n++;
