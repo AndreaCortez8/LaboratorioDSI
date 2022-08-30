@@ -48,6 +48,7 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                                             while($MatriculadosTutor = mysqli_fetch_array($AlumnosAntiguos)){
                                                 mysqli_query($con,"INSERT INTO matriculadoscontutor VALUES ('$MatriculadosTutor[Codigo]','$MatriculadosTutor[Nombre]','$MatriculadosTutor[NombreDocente]')");
                                             }
+
                                             $Docentes = mysqli_query($con,"SELECT NombreDocente FROM tutorados GROUP BY NombreDocente");
 
                                             $Cantidad_AlumnosNuevos = mysqli_num_rows($AlumnosNuevos);
@@ -70,7 +71,6 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                                             
                                             $ArregloAlumnoNuevos = array();
                                             $ArregloAlumnosNn = array();
-                                            
                                             $ArregloDocentes =array();
                                             $ArregloCantidadTutorados = array();
                                             //****
@@ -87,6 +87,7 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                                              while($CantidadTutoradoDocente = mysqli_fetch_array($CantidadTutorados_x_DOcente)){
                                                 array_push($ArregloCantidadTutorados,$CantidadTutoradoDocente['CantidadTutorados']);
                                             }
+                                            
                                             //*
                                             while($i < $aux2){
                                                 $Tutorados = intval($ArregloCantidadTutorados[$i]);
