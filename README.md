@@ -1,4 +1,4 @@
-# Entrega: Laboratorio N°08
+# Entrega: Laboratorio N°08 Sin Refactor
 #### 1.	Datos académicos
 ***Universidad:*** Universidad Nacional de San Antotio Abad del cusco
 
