@@ -37,7 +37,6 @@ El presente proyecto de desarrollo de software I tiene como finalidad mostrar a 
 - Se investiga sobre la importación de archivos .csv a la base de datos.
 - Se realizan las funciones necesarias para satisfacer con éxito las consultas solicitadas.
 - Se investiga sobre las exportaciones de las consultas en tipo .csv.
-- Se realiza la refactorización en el código.
 
 #### 9.	Archivos de entrada
 
