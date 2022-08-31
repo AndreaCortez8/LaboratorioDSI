@@ -18,6 +18,9 @@ Administracion de tutorias para la carrera de ingenieria informatica y de sistem
 - Cortez Ccahuantico Paola Andrea
 - Mercado Huaycho Adelmecia
 - Noa LLascanoa Eliazar 
+- Cruz Zamalloa Omar Rolando
+
+- Gamarra Herrera Gabriela
 
 #### 5.	Implementado en
 
