@@ -24,8 +24,8 @@ $con=mysqli_connect($host, $db_user, $db_pass,$database);
                             <hr style="border-top:1px dotted #ccc;"/>
                             <a href="ExportarNoMatriculados.php" class="btn btn-success pull-right"><span class="glyphicon glyphicon-export"></span> Exportar Tabla como CSV</a>
                             <br /><br />  
-                            <center>
-                            <button><a href="index.php?id=" class="btn btn-secondary"><b>Regresar</a></button></center>
+                            <center><form> <input type = "button" value = "Regresar" onclick = "history.back ()"> </form></center>
+                            
                             <table class="table" >
                                 <thead class="table-success table-striped" >
                                     <tr>
